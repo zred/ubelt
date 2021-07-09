@@ -10,6 +10,8 @@ setup(
         'dnspython',
         'future',
         'python-whois',
+        'passlib',
+        'diceware',
     ],
     entry_points='''
     [console_scripts]
