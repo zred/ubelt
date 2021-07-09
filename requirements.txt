@@ -1,0 +1,6 @@
+click==7.1.2
+diceware==0.9.6
+dnspython==2.1.0
+future==0.18.2
+passlib==1.7.4
+python-whois==0.7.3
