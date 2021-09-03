@@ -18,6 +18,7 @@ from random import choice, shuffle
 from string import digits, punctuation
 from collections import deque
 
+
 @click.group()
 def cli():
     pass
