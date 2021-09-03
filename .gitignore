@@ -1,6 +1,1 @@
-__pycache__/
-ubelt.egg-info/
-bin/
-lib/
-pyvenv.cfg
-.gitignore
+*
