@@ -2,6 +2,7 @@
 
 import click
 import socket
+import os
 import dns.resolver as dres
 from whois import whois as whois_lookup
 from passlib.hash import sha512_crypt
@@ -113,16 +114,18 @@ def tail(file,n=10):
 app = Flask(__name__)
 
 @app.route('/<path:path>')
-def serve_directory(path):
-    return send_from_directory('.', path)
+def serve_file(path):
+    """Serve a file from the specified PATH."""
+    directory = os.getcwd()
+    return send_from_directory(directory=directory, path=path)
 
-
-@click.command(help="serve the current directory")
-def serve():
-    ip = socket.gethostbyname(socket.gethostname())
-    url = f"http://{ip}:5000"
-    click.echo(f"Serving current directory on {url}")
-    app.run(host='0.0.0.0', port=5000)
+@click.command()
+@click.argument('path', default='.')
+@click.option('--port', '-p', default=5000, help='Port to serve on')
+def serve(path, port):
+    """Serve files from PATH on PORT."""
+    os.chdir(path)
+    app.run(host='0.0.0.0', port=port)
 
 
 cli.add_command(serve)
