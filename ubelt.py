@@ -1,12 +1,5 @@
 #!/bin/env python
-"""
-click==7.1.2
-dnspython==2.0.0
-future==0.18.2
-passlib==1.7.2
-python-whois==0.7.3
-diceware==0.9.6
-"""
+
 import click
 import socket
 import dns.resolver as dres
@@ -17,6 +10,7 @@ from re import findall
 from random import choice, shuffle
 from string import digits, punctuation
 from collections import deque
+from flask import Flask, send_from_directory
 
 
 @click.group()
@@ -116,6 +110,22 @@ def tail(file,n=10):
             click.echo(_,nl=False)
 
 
+app = Flask(__name__)
+
+@app.route('/<path:path>')
+def serve_directory(path):
+    return send_from_directory('.', path)
+
+
+@click.command(help="serve the current directory")
+def serve():
+    ip = socket.gethostbyname(socket.gethostname())
+    url = f"http://{ip}:5000"
+    click.echo(f"Serving current directory on {url}")
+    app.run(host='0.0.0.0', port=5000)
+
+
+cli.add_command(serve)
 cli.add_command(tail)
 cli.add_command(passphrase)
 cli.add_command(hashverify)

@@ -12,6 +12,7 @@ setup(
         'python-whois',
         'passlib',
         'diceware',
+        'flask',
     ],
     entry_points='''
     [console_scripts]
