@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='ubelt',
-    version='0.2',
+    version='0.3',
     py_modules=['ubelt'],
     install_requires=[
         'Click',
