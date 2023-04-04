@@ -123,13 +123,10 @@ def serve_file(path):
 @app.route('/')
 def link_files():
     links = []
-    files = os.listdir('.')
+    files = [_ for _ in os.listdir('.') if not os.path.isdir(_)]
     for file in files:
-        if os.path.isdir(file):
-            pass
-        else:
-            link = f'<a href="/{file}/">{file}</a>'
-            links.append(link)
+        link = f'<a href="/{file}/">{file}</a>'
+        links.append(link)
     return '<br>'.join(links)
 
 
