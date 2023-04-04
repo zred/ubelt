@@ -119,6 +119,20 @@ def serve_file(path):
     directory = os.getcwd()
     return send_from_directory(directory=directory, path=path)
 
+
+@app.route('/')
+def link_files():
+    links = []
+    files = os.listdir('.')
+    for file in files:
+        if os.path.isdir(file):
+            pass
+        else:
+            link = f'<a href="/{file}/">{file}</a>'
+            links.append(link)
+    return '<br>'.join(links)
+
+
 @click.command()
 @click.argument('path', default='.')
 @click.option('--port', '-p', default=5000, help='Port to serve on')
