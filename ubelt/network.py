@@ -17,7 +17,7 @@ def reverse_dns_lookup(ip: str) -> None:
     except Exception as e:
         click.echo(e)
 
-def whois_lookup(target: str) -> None:
+def lookup_whois(target: str) -> None:
     try:
         rsps = whois_lookup(target)
         click.echo(rsps)

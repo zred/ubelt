@@ -1,5 +1,5 @@
 import click
-from .network import dns_lookup, reverse_dns_lookup, whois_lookup, mx_lookup, ns_lookup
+from .network import dns_lookup, reverse_dns_lookup, lookup_whois, mx_lookup, ns_lookup
 from .passwords import hash_password, verify_hash, generate_passphrase
 from .file_server import serve_files, tail_file
 
@@ -20,7 +20,7 @@ def rdns(ip: str) -> None:
 @click.command(help="Perform WHOIS lookup")
 @click.argument("target")
 def whois(target: str) -> None:
-    whois_lookup(target)
+    lookup_whois(target)
 
 @click.command(help="Perform MX lookup on URL")
 @click.argument("url")
